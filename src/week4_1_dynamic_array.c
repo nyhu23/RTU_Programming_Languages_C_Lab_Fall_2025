@@ -22,17 +22,37 @@ int main(void) {
     }
 
     // TODO: Allocate memory for n integers using malloc
-    // Example: arr = malloc(n * sizeof(int));
+    arr = malloc(n * sizeof(int));
 
     // TODO: Check allocation success
+    if (arr == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
 
     // TODO: Read n integers from user input and store in array
+    printf("Enter %d integers:\n", n);
+    for (int i = 0; i < n; i++) {
+        if (scanf("%d", &arr[i]) != 1) {
+            printf("Invalid input.\n");
+            free(arr);
+            return 1;
+        }
+    }
 
     // TODO: Compute sum and average
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+    float average = (float)sum / n;
 
     // TODO: Print the results
+    printf("Sum: %d\n", sum);
+    printf("Average: %.2f\n", average);
 
     // TODO: Free allocated memory
+    free(arr);
 
     return 0;
 }
