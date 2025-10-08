@@ -1,7 +1,7 @@
 /*
  * week4_2_struct_student.c
- * Author: [Your Name]
- * Student ID: [Your ID]
+ * Author: Nithya Santhosh
+ * Student ID: 241ADB038
  * Description:
  *   Demonstrates defining and using a struct in C.
  *   Students should define a 'Student' struct with fields like name, id, and grade.
