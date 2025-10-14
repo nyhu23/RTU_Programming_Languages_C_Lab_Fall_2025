@@ -28,8 +28,16 @@ int main(void) {
     const char *filename = "student.txt";
 
     // TODO: Call save_student() to save student data to file
+    save_student(s1, filename);
+    
     // TODO: Call load_student() to read data back into a new struct
+    Student s2 = load_student(filename);
+    
     // TODO: Print loaded data to confirm correctness
+    printf("Loaded student data:\n");
+    printf("Name: %s\n", s2.name);
+    printf("Age: %d\n", s2.age);
+    printf("GPA: %.2f\n", s2.gpa);
 
     return 0;
 }
@@ -37,13 +45,39 @@ int main(void) {
 // TODO: Implement save_student()
 // Open file for writing, check errors, write fields, then close file
 void save_student(Student s, const char *filename) {
-    // ...
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL) {
+        printf("Error opening file for writing!\n");
+        return;
+    }
+    
+    fprintf(fp, "%s\n", s.name);
+    fprintf(fp, "%d\n", s.age);
+    fprintf(fp, "%.2f\n", s.gpa);
+    
+    fclose(fp);
 }
 
 // TODO: Implement load_student()
 // Open file for reading, check errors, read fields, then close file
 Student load_student(const char *filename) {
     Student s;
-    // ...
+    FILE *fp = fopen(filename, "r");
+    
+    if (fp == NULL) {
+        printf("Error opening file for reading!\n");
+        strcpy(s.name, "");
+        s.age = 0;
+        s.gpa = 0.0f;
+        return s;
+    }
+    
+    fgets(s.name, MAX_NAME_LEN, fp);
+    
+    s.name[strcspn(s.name, "\n")] = '\0';
+    
+    fscanf(fp, "%d", &s.age);
+    fscanf(fp, "%f", &s.gpa);
+    fclose(fp);
     return s;
 }
